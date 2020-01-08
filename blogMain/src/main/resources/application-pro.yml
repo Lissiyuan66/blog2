@@ -1,0 +1,59 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1/blog?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: ****
+    password: ****
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+  mail:
+    host: smtp.qq.com #发送邮件服务器
+    username: 4******40@qq.com #发送邮件的邮箱地址
+    password: hs******bifi #客户端授权码，不是邮箱密码，这个在qq邮箱设置里面自动生成的
+    port: 587
+    default-encoding: UTF-8
+    protocol: smtp
+    properties:
+      from: 4******0@qq.com
+  activemq:
+    broker-url: tcp://127.0.0.1:61616    # ActiveMQ消息中间件服务器通讯地址
+    user: admin  # 用户名
+    password: admin  #密码
+
+queue: springboot-queue   #自定义队列名，等下程序中会用到
+
+logging:
+  level:
+    root: warn
+    com.lsy: info
+  file: log/blog-dev.log
+server:
+  port: 8080
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#springboot配置ssl证书和http/https访问，已经弃被nginx取代
+  #ssl:
+    #key-store: classpath:2645063_www.is9.club.pfx
+    #key-store-password: 9YkD4Au4
+    #key-store-type: PKCS12
+  #servlet-path: /
+
+#http:
+  #port: 80

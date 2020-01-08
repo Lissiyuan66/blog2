@@ -1,0 +1,34 @@
+{
+  "properties": [
+    {
+      "name": "comment.avatar",
+      "type": "java.lang.String",
+      "description": "Description for comment.avatar."
+    },
+    {
+      "name": "logging.server.port.ssl.key-store-password",
+      "type": "java.lang.String",
+      "description": "Description for logging.server.port.ssl.key-store-password."
+    },
+    {
+      "name": "github.client.userAuthorizationUri",
+      "type": "java.lang.String",
+      "description": "Description for github.client.userAuthorizationUri."
+    },
+    {
+      "name": "justauth.type.github.client-secret",
+      "type": "java.lang.String",
+      "description": "Description for justauth.type.github.client-secret."
+    },
+    {
+      "name": "spring.mail.from",
+      "type": "java.lang.String",
+      "description": "Description for spring.mail.from."
+    },
+    {
+      "name": "spring.properties.mail.smtp.starttls.enable",
+      "type": "java.lang.String",
+      "description": "Description for spring.properties.mail.smtp.starttls.enable."
+    }
+  ]
+}
