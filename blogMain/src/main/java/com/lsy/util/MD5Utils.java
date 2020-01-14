@@ -40,6 +40,6 @@ public class MD5Utils {
 
 
     public static void main(String[] args) {
-        System.out.println(code("970909"));
+        System.out.println(code("计算密码"));
     }
 }

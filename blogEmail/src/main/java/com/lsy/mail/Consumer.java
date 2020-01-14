@@ -16,7 +16,7 @@ public class Consumer {
     private EmailUtil emailUtil;
 
 
-    //监听队列、解析json并调用线程池发送邮件
+    //监听队列、解析json
     @JmsListener(destination = "${queue}")     //监听的队列，配置文件中的queue属性
     public void receive(String msg) {
         if (StringUtils.isEmpty(msg)) {

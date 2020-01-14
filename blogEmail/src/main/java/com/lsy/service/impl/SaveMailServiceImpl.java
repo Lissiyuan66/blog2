@@ -21,7 +21,7 @@ public class SaveMailServiceImpl implements SaveMailService {
         SuccessMail successMail = new SuccessMail();
         successMail.setSuccessmail(smail);
         successMail.setSuccesstime(new Date());
-        //注意这里传入对象即可
+        //这里传入对象即可
         mongoTemplate.save(successMail);
     }
 

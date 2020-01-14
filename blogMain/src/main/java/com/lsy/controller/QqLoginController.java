@@ -1,9 +1,5 @@
 package com.lsy.controller;
 
-import com.lsy.service.BlogService;
-import com.lsy.service.CommentService;
-import com.lsy.service.TagService;
-import com.lsy.service.TypeService;
 import com.lsy.vo.QQusert;
 import com.qq.connect.QQConnectException;
 import com.qq.connect.api.OpenID;
@@ -15,13 +11,7 @@ import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.qq.connect.javabeans.weibo.Company;
 import com.qq.connect.oauth.Oauth;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,15 +21,6 @@ import java.util.ArrayList;
 @Controller
 @Slf4j
 public class QqLoginController {
-
-    @Autowired
-    private BlogService blogService;
-
-    @Autowired
-    private TypeService typeService;
-
-    @Autowired
-    private TagService tagService;
 
     String url;
 
@@ -61,8 +42,7 @@ public class QqLoginController {
     @RequestMapping("/qq/index")
     public String Login(HttpServletRequest request, HttpSession session) {
 
-        String accessToken = null,
-                openID = null;
+        String accessToken = null, openID = null;
         UserInfoBean userInfoBean = null;
         try {
             AccessToken accessTokenObj = (new Oauth()).getAccessTokenByRequest(request);

@@ -11,10 +11,6 @@ import java.util.Date;
 @Data
 public class SuccessMail {
 
-    /*@Id
-    @Field("mail_id")
-    private Long id;*/
-
     //无需设定主键，Mongo会帮我们自动生成Object类型的主键
     //这里是字段名，下面同理
     @Field("success_mail")

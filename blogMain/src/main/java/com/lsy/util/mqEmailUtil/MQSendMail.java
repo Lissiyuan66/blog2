@@ -21,6 +21,7 @@ public class MQSendMail {
 
     //每隔5秒向消息队列发送消息
     //@Scheduled(fixedDelay = 5000)
+    //异步发送
     @Async
     public void send(String title,String text,String email){
         JSONObject jsonObject = new JSONObject();

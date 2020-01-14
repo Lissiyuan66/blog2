@@ -9,9 +9,6 @@ import java.util.Date;
 @Document(collection = "FAILURE_MAIL")
 @Data
 public class FailureMail {
-    /*@Id
-    @Field("mail_id")
-    private Long id;*/
 
     @Field("failure_mail")
     private String failureMail;

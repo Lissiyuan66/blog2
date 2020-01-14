@@ -57,7 +57,6 @@ public class IndexController {
     @GetMapping("/blog/{id}")
     public String blog(@PathVariable Long id,Model model) {
         model.addAttribute("blog", blogService.getAndConvert(id));
-        //System.out.println("访问图片地址"+blogService.getAndConvert(id).getTupian());
         return "blog";
     }
 

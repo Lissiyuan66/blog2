@@ -23,14 +23,6 @@ public class EmailUtil {
     @Autowired
     private SaveMailService saveMailService;
 
-    /**
-     * 使用线程池异步发送邮件
-     * 线程池参数在类AsyncTaskConfig中配置
-     * @param title
-     * @param text
-     * @param Email
-     */
-    //@Async
     public void sendEmailUtil(String title, String text, String Email) {
         //发送消息对象
         SimpleMailMessage message = new SimpleMailMessage();
