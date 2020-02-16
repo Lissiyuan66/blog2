@@ -10,6 +10,7 @@ import com.lsy.util.MyBeanUtils;
 import com.lsy.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -146,9 +147,4 @@ public class BlogServiceImpl implements BlogService {
         blogRepository.delete(id);
     }
 
-    @Transactional
-    @Override
-    public String selectBlogTitleById(Long id) {
-        return blogRepository.selectBlogTitleByCommentBlogId(id);
-    }
 }

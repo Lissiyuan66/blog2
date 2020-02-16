@@ -187,6 +187,12 @@
 			<artifactId>fastjson</artifactId>
 			<version>LATEST</version>
 		</dependency>
+		<!--redis依赖-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<version>1.5.7.RELEASE</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -35,5 +35,4 @@ public interface BlogService {
 
     void deleteBlog(Long id);
 
-    String selectBlogTitleById(Long id);
 }
