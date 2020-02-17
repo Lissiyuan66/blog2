@@ -40,7 +40,7 @@ public class Comment {
 
     private boolean adminComment;
 
-    @JSONField(serialize = false)
+    @Transient
     private String yzm;
 
     public String getEmail() {

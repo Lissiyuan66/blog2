@@ -3,21 +3,21 @@ spring:
     # ActiveMQ消息中间件服务器通讯地址
     broker-url: tcp://127.0.0.1:61616
     user: admin  # 用户名
-    password: password  #密码
+    password: admin  #密码
   # 发送邮件配置
   mail:
     host: smtp.qq.com #发送邮件服务器
-    username: 46****1640@qq.com #发送邮件的邮箱地址
-    password: hsc******dvbifi #客户端授权码，不是邮箱密码，这个在qq邮箱设置里面自动生成的
+    username: 464971640@qq.com #发送邮件的邮箱地址
+    password: hsczynyyoqdvbifi #客户端授权码，不是邮箱密码，这个在qq邮箱设置里面自动生成的
     port: 587
     default-encoding: UTF-8
     protocol: smtp
     properties:
-      from: 4******640@qq.com
+      from: 464971640@qq.com
   # MongoDB配置
   data:
     mongodb:
-      uri: mongodb://admin:password@127.0.0.1:27017/Mail?authSource=admin&authMechanism=SCRAM-SHA-1
+      uri: mongodb://admin:123456@47.94.236.3:27017/Mail?authSource=admin&authMechanism=SCRAM-SHA-1
       field-naming-strategy: org.springframework.data.mapping.model.SnakeCaseFieldNamingStrategy
 #自定义队列名属性，等下程序中会用到（以生产者的队列名一致）
 queue: springboot-queue
