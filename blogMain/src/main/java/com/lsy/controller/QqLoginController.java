@@ -1,6 +1,5 @@
 package com.lsy.controller;
 
-import com.lsy.vo.QQusert;
 import com.qq.connect.QQConnectException;
 import com.qq.connect.api.OpenID;
 import com.qq.connect.api.qzone.PageFans;
@@ -52,7 +51,7 @@ public class QqLoginController {
             if (accessTokenObj.getAccessToken().equals("")) {
 //                我们的网站被CSRF攻击了或者用户取消了授权
 //                做一些数据统计工作
-                System.out.print("没有获取到响应参数");
+                log.error("没有获取到响应参数");
             } else {
                 accessToken = accessTokenObj.getAccessToken();
                 tokenExpireIn = accessTokenObj.getExpireIn();
@@ -146,12 +145,6 @@ public class QqLoginController {
         } catch (QQConnectException e) {
             log.error("获取qq用户异常");
         }
-
-
-        QQusert qqusert = new QQusert();
-        qqusert.setQqtouxiang(userInfoBean.getAvatar().getAvatarURL30());
-        log.info("头像地址" + userInfoBean.getAvatar().getAvatarURL30());
-        session.setAttribute("qqusert", qqusert);
         session.setAttribute("qquser", userInfoBean);
         return "redirect:" + url;
     }
