@@ -3,7 +3,6 @@ package com.lsy.po;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import java.util.Date;
 
 //这里指定我们MongoDB的名字，Spring会帮我们自动创建数据库
 @Document(collection = "SUCCESS_MAIL")
@@ -16,5 +15,11 @@ public class SuccessMail {
     private String successmail;
 
     @Field("success_time")
-    private Date successtime;
+    private String successtime;
+
+    @Field("success_title")
+    private String successtitle;
+
+    @Field("success_text")
+    private String successtext;
 }
