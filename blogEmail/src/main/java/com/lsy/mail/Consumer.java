@@ -20,6 +20,7 @@ public class Consumer {
     @JmsListener(destination = "${queue}")     //监听的队列，配置文件中的queue属性
     public void receive(String msg) {
         if (StringUtils.isEmpty(msg)) {
+            log.info("收到生产者消息为空");
             return;
         }
         log.info("收到生产者消息：" + msg);

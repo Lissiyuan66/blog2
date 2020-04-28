@@ -1,4 +1,4 @@
-package com.lsy.util.mqEmailUtil;
+package com.lsy.util;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;

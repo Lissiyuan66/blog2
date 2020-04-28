@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+
 @Controller
 public class IndexController {
 
@@ -24,7 +25,6 @@ public class IndexController {
 
     @Autowired
     private TagService tagService;
-
 
     @GetMapping("/")
     public String index(@PageableDefault(size = 8, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
@@ -65,7 +65,6 @@ public class IndexController {
         model.addAttribute("newblogs", blogService.listRecommendBlogTop(3));
         return "_fragments :: newblogList";
     }
-
 
 
 

@@ -7,10 +7,10 @@ import com.lsy.po.Type;
 import com.lsy.service.BlogService;
 import com.lsy.util.MarkdownUtils;
 import com.lsy.util.MyBeanUtils;
+import com.lsy.util.RedisUtil;
 import com.lsy.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,27 +30,53 @@ public class BlogServiceImpl implements BlogService {
     @Autowired
     private BlogRepository blogRepository;
 
+    @Autowired
+    private RedisUtil redisUtil;
+
+    //获取博客对象
     @Override
     public Blog getBlog(Long id) {
-        return blogRepository.findOne(id);
+        //查询缓存，存在返回，不存在加入缓存
+        String strblogid = "blog-"+ id;
+        if (redisUtil.hasKey(strblogid)) {
+            return (Blog) redisUtil.get(strblogid);
+        }
+        Blog b = blogRepository.findOne(id);
+        //加入缓存
+        redisUtil.set(strblogid, b, 600);
+        return b;
     }
 
+    //获取博客，并增加点击量
     @Transactional
     @Override
     public Blog getAndConvert(Long id) {
-        Blog blog = blogRepository.findOne(id);
+        Blog blog = null;
+        //查询缓存
+        String strblogid = "blog-"+ id;
+        if (redisUtil.hasKey(strblogid)) {
+            blogRepository.updateViews(id);
+            blog = (Blog) redisUtil.get(strblogid);
+        }
+        if (blog==null) {
+            blog = blogRepository.findOne(id);
+        }
         if (blog == null) {
             throw new NotFoundException("该博客不存在");
         }
         Blog b = new Blog();
-        BeanUtils.copyProperties(blog,b);
+        BeanUtils.copyProperties(blog, b);
         String content = b.getContent();
         b.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
+        //增加查询次数
         blogRepository.updateViews(id);
+        //将处理过的博客对象替换缓存
+        redisUtil.set(strblogid,b,600);
         return b;
     }
 
 
+    //获取分页对象
     @Override
     public Page<Blog> listBlog(Pageable pageable, BlogQuery blog) {
         return blogRepository.findAll(new Specification<Blog>() {
@@ -58,7 +84,7 @@ public class BlogServiceImpl implements BlogService {
             public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
                 List<Predicate> predicates = new ArrayList<>();
                 if (!"".equals(blog.getTitle()) && blog.getTitle() != null) {
-                    predicates.add(cb.like(root.<String>get("title"), "%"+blog.getTitle()+"%"));
+                    predicates.add(cb.like(root.<String>get("title"), "%" + blog.getTitle() + "%"));
                 }
                 if (blog.getTypeId() != null) {
                     predicates.add(cb.equal(root.<Type>get("type").get("id"), blog.getTypeId()));
@@ -69,7 +95,7 @@ public class BlogServiceImpl implements BlogService {
                 cq.where(predicates.toArray(new Predicate[predicates.size()]));
                 return null;
             }
-        },pageable);
+        }, pageable);
     }
 
     @Override
@@ -83,19 +109,19 @@ public class BlogServiceImpl implements BlogService {
             @Override
             public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
                 Join join = root.join("tags");
-                return cb.equal(join.get("id"),tagId);
+                return cb.equal(join.get("id"), tagId);
             }
-        },pageable);
+        }, pageable);
     }
 
     @Override
     public Page<Blog> listBlog(String query, Pageable pageable) {
-        return blogRepository.findByQuery(query,pageable);
+        return blogRepository.findByQuery(query, pageable);
     }
 
     @Override
     public List<Blog> listRecommendBlogTop(Integer size) {
-        Sort sort = new Sort(Sort.Direction.DESC,"updateTime");
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(0, size, sort);
         return blogRepository.findTop(pageable);
     }
@@ -116,6 +142,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
 
+    //保存博客
     @Transactional
     @Override
     public Blog saveBlog(Blog blog) {
@@ -129,14 +156,20 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.save(blog);
     }
 
+    //修改博客
     @Transactional
     @Override
     public Blog updateBlog(Long id, Blog blog) {
         Blog b = blogRepository.findOne(id);
+        //查询缓存，存在则删除
+        String strblogid = "blog-"+ id;
+        if (redisUtil.hasKey(strblogid)) {
+            redisUtil.del(strblogid);
+        }
         if (b == null) {
             throw new NotFoundException("该博客不存在");
         }
-        BeanUtils.copyProperties(blog,b, MyBeanUtils.getNullPropertyNames(blog));
+        BeanUtils.copyProperties(blog, b, MyBeanUtils.getNullPropertyNames(blog));
         b.setUpdateTime(new Date());
         return blogRepository.save(b);
     }
@@ -144,6 +177,11 @@ public class BlogServiceImpl implements BlogService {
     @Transactional
     @Override
     public void deleteBlog(Long id) {
+        //查询缓存，存在则删除
+        String strblogid = "blog-"+ id;
+        if (redisUtil.hasKey(strblogid)) {
+            redisUtil.del(strblogid);
+        }
         blogRepository.delete(id);
     }
 

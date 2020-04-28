@@ -7,7 +7,7 @@ import com.lsy.service.BlogService;
 import com.lsy.service.CommentService;
 import com.lsy.util.CodeUtil;
 import com.lsy.util.SensitiveFilter;
-import com.lsy.util.mqEmailUtil.MQSendMail;
+import com.lsy.util.MQSendMail;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

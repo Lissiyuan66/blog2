@@ -3,11 +3,13 @@ package com.lsy.po;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.codehaus.jackson.annotate.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 
 @Entity
@@ -38,7 +40,9 @@ public class Blog {
     private Date createTime;
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
+    //防止序列化无限递归
     @ManyToOne
+    //@JsonBackReference
     private Type type;
     @ManyToMany(cascade = {CascadeType.PERSIST})
     private List<Tag> tags = new ArrayList<>();

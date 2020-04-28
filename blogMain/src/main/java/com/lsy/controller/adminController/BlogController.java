@@ -6,7 +6,7 @@ import com.lsy.service.BlogService;
 import com.lsy.service.CommentService;
 import com.lsy.service.TagService;
 import com.lsy.service.TypeService;
-import com.lsy.util.mqEmailUtil.MQSendMail;
+import com.lsy.util.MQSendMail;
 import com.lsy.vo.BlogQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -108,13 +108,10 @@ public class BlogController {
 
                 String filename = "http://lisiyuanblog.com/img/" + file.getOriginalFilename();
                 blog.setTupian(filename);
-            } catch (FileNotFoundException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 attributes.addFlashAttribute("message", "操作失败");
 
-            } catch (IOException e) {
-                e.printStackTrace();
-                attributes.addFlashAttribute("message", "操作失败");
             }
         }
         //修改后不会发送邮件通知

@@ -20,6 +20,7 @@ public class CommentServiceImpl implements CommentService {
     private CommentRepository commentRepository;
 
 
+    //获取评论列表
     @Override
     public List<Comment> listCommentByBlogId(Long blogId) {
         Sort sort = new Sort("createTime");
@@ -27,6 +28,7 @@ public class CommentServiceImpl implements CommentService {
         return eachComment(comments);
     }
 
+    //保存评论
     @Transactional
     @Override
     public Comment saveComment(Comment comment) {
@@ -42,16 +44,19 @@ public class CommentServiceImpl implements CommentService {
     }
 
 
+    //根据id查找评论邮箱
     @Override
     public String selectCommentMailById(Long id) {
         return commentRepository.findCommentEmail(id);
     }
 
+    //根据id查找评论姓名
     @Override
     public String selectNameById(Long id) {
         return commentRepository.selectNameById(id);
     }
 
+    //返货所有评论邮箱
     @Override
     public List<String> selectEmailList() {
         return commentRepository.selectEmailList();

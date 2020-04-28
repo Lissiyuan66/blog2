@@ -3,6 +3,7 @@ package com.lsy.po;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class Type {
     private String name;
 
     @OneToMany(mappedBy = "type")
+    //@JsonManagedReference
     private List<Blog> blogs = new ArrayList<>();
 
 }

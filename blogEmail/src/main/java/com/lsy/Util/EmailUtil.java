@@ -40,11 +40,11 @@ public class EmailUtil {
             message.setTo(Email);
             javaMailSender.send(message);
             //保存成功列表到mongodb
-            saveMailService.SaveSuccessMail(Email,title,text);
+            //saveMailService.SaveSuccessMail(Email,title,text);
             log.info("邮件发送完成,收件人:" + Email);
         } catch (Exception e) {
             //保存失败列表到mongodb
-            saveMailService.SaveFailureMail(Email,title,text);
+            //saveMailService.SaveFailureMail(Email,title,text);
             log.warn("发送失败，收件人是："+Email);
         }
     }

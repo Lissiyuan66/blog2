@@ -1,4 +1,4 @@
-package com.lsy.util.mqEmailUtil;
+package com.lsy.config;
 
 import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.beans.factory.annotation.Value;
