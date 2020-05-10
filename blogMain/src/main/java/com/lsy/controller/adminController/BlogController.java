@@ -17,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.List;
@@ -75,11 +74,11 @@ public class BlogController {
     }
 
 
-    //管理界面查找
+    //修改
     @GetMapping("/blogs/{id}/input")
     public String editInput(@PathVariable Long id, Model model) {
         setTypeAndTag(model);
-        Blog blog = blogService.getBlog(id);
+        Blog blog = blogService.getChangesBlog(id);
         blog.init();
         model.addAttribute("blog", blog);
         return INPUT;
@@ -88,7 +87,7 @@ public class BlogController {
 
     //增加博客
     @PostMapping("/blogs")
-    public String post(HttpServletRequest response, Blog blog, RedirectAttributes attributes, HttpSession session, @RequestParam(value = "file") MultipartFile file) {
+    public String post(Blog blog, RedirectAttributes attributes, HttpSession session, @RequestParam(value = "file") MultipartFile file) {
         blog.setUser((User) session.getAttribute("user"));
         blog.setType(typeService.getType(blog.getType().getId()));
         blog.setTags(tagService.listTag(blog.getTagIds()));
@@ -130,7 +129,7 @@ public class BlogController {
         else if (!y_up){
             List<String> emailList = commentService.selectEmailList();
             for (int i=0;i<emailList.size();i++){
-                producer.send("小源发布了新博客，有空去看看吧","Hi，小源发布了最新博客："+blog.getTitle()+"。快去看看吧:"+"http://lisiyuanblog.com:8080/blog/"+blog.getId(),emailList.get(i));
+                producer.send(blog.getTitle(),blog.getDescription(),emailList.get(i),null,"http://lisiyuanblog.com:8080/blog/"+blog.getId(),null,null);
             }
             attributes.addFlashAttribute("message", "操作成功");
         }

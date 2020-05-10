@@ -16,4 +16,6 @@ public interface CommentService {
     String selectNameById(Long id);
 
     List<String> selectEmailList();
+
+    String selectCommentTextById(Long id);
 }

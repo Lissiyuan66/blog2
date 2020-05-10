@@ -1,4 +1,11 @@
 spring:
+  thymeleaf:
+    mode: HTML #格式
+    cache: true #缓存
+    suffix: .html #后缀
+    content-type: text/html
+    prefix: classpath:/templates/ #路径
+    check-template-location: true
   activemq:
     # ActiveMQ消息中间件服务器通讯地址
     broker-url: tcp://127.0.0.1:61616

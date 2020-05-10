@@ -35,4 +35,6 @@ public interface BlogService {
 
     void deleteBlog(Long id);
 
+    Blog getChangesBlog(Long id);
+
 }

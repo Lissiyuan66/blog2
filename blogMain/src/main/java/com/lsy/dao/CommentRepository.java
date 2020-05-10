@@ -22,4 +22,7 @@ public interface CommentRepository extends JpaRepository<Comment,Long>{
     @Query("select c.email from Comment c group by c.email")
     List<String> selectEmailList();
 
+    @Query("select c.content from Comment c where c.id = ?1")
+    String selectTextById(Long id);
+
 }

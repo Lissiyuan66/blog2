@@ -3,7 +3,3 @@ spring:
     mode: HTML
   profiles:
     active: pro
-  messages:
-    basename: i18n/messages
-
-comment.avatar: /images/avatar.png

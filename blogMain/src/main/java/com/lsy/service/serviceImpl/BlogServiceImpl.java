@@ -185,4 +185,10 @@ public class BlogServiceImpl implements BlogService {
         blogRepository.delete(id);
     }
 
+    //为修改功能查询blog，不走缓存
+    @Override
+    public Blog getChangesBlog(Long id) {
+        return blogRepository.findOne(id);
+    }
+
 }

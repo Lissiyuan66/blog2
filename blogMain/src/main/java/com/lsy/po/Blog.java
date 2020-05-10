@@ -3,7 +3,6 @@ package com.lsy.po;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.codehaus.jackson.annotate.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;

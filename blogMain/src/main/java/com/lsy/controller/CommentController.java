@@ -75,16 +75,23 @@ public class CommentController {
         //查询父评论邮箱
         String email = commentService.selectCommentMailById(comment.getParentComment().getId());
         //查询博客的标题
-        String blogTitle = blogService.getBlog(blogId).getTitle();
+        String title = blogService.getBlog(blogId).getTitle();
+        //评论内容
+        String text = comment.getContent();
+        //评论地址
+        String url = comment.getPinglunurl();
+        //评论人昵称
+        String zname = comment.getNickname();
         if (email != null) {
+            //查询父评论内容
+            String fText = commentService.selectCommentTextById(comment.getParentComment().getId());
             //查询父评论昵称
             String fname = commentService.selectNameById(comment.getParentComment().getId());
-            String title = "Hi, " + fname + " 有人在小源的个人博客评论了你，快去看看吧！";
-            String text = "Hi," + fname + ",你好呀!" + "有小伙伴#" + comment.getNickname() + "#在小源的博客:[ " + blogTitle + " ]评论了你，评论内容是：**" + comment.getContent() + "**快去回复他吧： " + comment.getPinglunurl();
-            producer.send(title, text, email);
+            producer.send(title, text, email, fname, url, zname, fText);
+        } else {
+            //通知管理员
+            producer.send(title, text, "17645135742@163.com", null, url, zname, null);
         }
-        //通知管理员
-        producer.send("有人在博客评论了，快去看看吧", comment.getNickname() + "在" + blogTitle + "评论了你，去看看吧:" + comment.getPinglunurl(), "17645135742@163.com");
         commentService.saveComment(comment);
         return "redirect:/comments/" + blogId;
     }

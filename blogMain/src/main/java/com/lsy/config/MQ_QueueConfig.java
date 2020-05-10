@@ -16,8 +16,9 @@ public class MQ_QueueConfig {
 
     //注册bean
     @Bean
-    public Queue logQueue() {
+    public Queue logQueue1() {
         return new ActiveMQQueue(queue);
     }
+
 }
 

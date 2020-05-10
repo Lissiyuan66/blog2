@@ -56,10 +56,16 @@ public class CommentServiceImpl implements CommentService {
         return commentRepository.selectNameById(id);
     }
 
-    //返货所有评论邮箱
+    //返回所有评论邮箱
     @Override
     public List<String> selectEmailList() {
         return commentRepository.selectEmailList();
+    }
+
+    //查询评论内容
+    @Override
+    public String selectCommentTextById(Long id) {
+        return commentRepository.selectTextById(id);
     }
 
 
