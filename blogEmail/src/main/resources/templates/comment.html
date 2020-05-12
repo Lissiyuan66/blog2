@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Emailable Report</title>
+</head>
+<body>
+
+
+<table width="100%" border="1" cellspacing="2" cellpadding="10" style="border-collapse: collapse; display: table;">
+    <tbody>
+    <table data-module="module-3" data-thumb="https://lisiyuanblog.com/img/03.png" width="100%" cellpadding="0"
+           cellspacing="0">
+        <tr>
+            <td data-bgcolor="bg-module" bgcolor="#eaeced">
+                <table class="flexible" width="600" align="center" style="margin:0 auto;" cellpadding="0"
+                       cellspacing="0">
+                    <tr>
+                        <td class="img-flex"><img src="https://lisiyuanblog.com/img/img-02.jpg"
+                                                  style="vertical-align:top;" width="600"
+                                                  height="249" alt=""/></td>
+                    </tr>
+                    <tr>
+                        <td data-bgcolor="bg-block" class="holder" style="padding:65px 60px 50px;" bgcolor="#f9f9f9">
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td data-color="title" data-size="size title" data-min="20" data-max="40"
+                                        data-link-color="link title color"
+                                        data-link-style="text-decoration:none; color:#292c34;" class="title"
+                                        align="center"
+                                        style="font:30px/33px Arial, Helvetica, sans-serif; color:#292c34; padding:0 0 24px;">
+                                        您在《<a style="text-decoration:none;color: #12ADDB;"
+                                              href="#" th:href="@{ {url}(url=${url}) }"
+                                              target="_blank" rel="noopener" th:text="${title}">博客标题</a>》的评论有了新的回复
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-color="text" data-size="size text" data-min="10" data-max="26"
+                                        data-link-color="link text color"
+                                        data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;"
+                                        align="center"
+                                        style="font:16px/29px Arial, Helvetica, sans-serif; color:#888; padding:0 0 21px;">
+                                        你好<b><span th:text="${fname}">父评论人</span></b>,您的评论：
+                                        <br>
+                                        <span th:text="${ftext}">父评论</span>
+                                        <br>
+                                        <b><span th:text="${zname}">子评论人</span></b>,给您的回复：
+                                        <br>
+                                        <span th:text="${text}">回复</span>
+                                        <br>
+                                        <br>
+                                        除非一个人有大量的工作要做，否则他不可能从懒散、空闲中得到乐趣。——杰罗姆
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0 0 20px;">
+                                        <table width="134" align="center" style="margin:0 auto;" cellpadding="0"
+                                               cellspacing="0">
+                                            <tr>
+                                                <td data-bgcolor="bg-button" data-size="size button" data-min="10"
+                                                    data-max="16" class="btn" align="center"
+                                                    style="font:12px/14px Arial, Helvetica, sans-serif; color:#f8f9fb; text-transform:uppercase; mso-padding-alt:12px 10px 10px; border-radius:2px;"
+                                                    bgcolor="#f5ba1c">
+                                                    <a target="_blank"
+                                                       style="text-decoration:none; color:#f8f9fb; display:block; padding:12px 10px 10px;"
+                                                       href="#" th:href="@{ {url}(url=${url}) }">查看完整的回复内容</a>
+                                                    <br>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-color="text" data-size="size text" data-min="10" data-max="26"
+                                        data-link-color="link text color"
+                                        data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;"
+                                        align="center"
+                                        style="font:16px/29px Arial, Helvetica, sans-serif; color:#888; padding:0 0 21px;">
+                                        本邮件为系统自动发送，请勿直接回复~
+                                        <br>
+                                        Copyright © 2019-<span
+                                            th:text="${#dates.year(#dates.createNow())}"></span>Lisiyuan Designed by Lisiyuan
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="28"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+
+</body>
+</html>
