@@ -1,22 +1,26 @@
 package com.lsy.po;
 
 import lombok.Data;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
-@Document(collection = "FAILURE_MAIL")
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "t_failuremail")
 @Data
 public class FailureMail {
 
-    @Field("failure_mail")
-    private String failureMail;
+    @Id
+    @GeneratedValue
+    private Long id;
 
-    @Field("failure_time")
-    private String failureTime;
+    private String failuremail;
 
-    @Field("failure_title")
+    private String failuretime;
+
     private String failuretitle;
 
-    @Field("failure_text")
     private String failuretext;
 }

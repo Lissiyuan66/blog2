@@ -22,10 +22,19 @@ spring:
     properties:
       from: 464971640@qq.com
   # MongoDB配置
-  data:
-    mongodb:
-      uri: mongodb://admin:123456@47.94.236.3:27017/Mail?authSource=admin&authMechanism=SCRAM-SHA-1
-      field-naming-strategy: org.springframework.data.mapping.model.SnakeCaseFieldNamingStrategy
+  #data:
+    #mongodb:
+      #uri: mongodb://admin:123456@47.94.236.3:27017/Mail?authSource=admin&authMechanism=SCRAM-SHA-1
+      #field-naming-strategy: org.springframework.data.mapping.model.SnakeCaseFieldNamingStrategy
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.94.236.3/blog?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: ASD17645135742
 #自定义队列名属性，等下程序中会用到（以生产者的队列名一致）
 queue: springboot-queue
 server:
